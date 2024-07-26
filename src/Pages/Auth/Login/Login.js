@@ -31,9 +31,9 @@ const Login = () => {
           Submit
         </Button>
         <Typography variant="body2" sx={{ mt: 2 }}>
-          New to Job Portal
+          Don't have an account?{" "}
           <Link to="/signup" style={{ color: "blue" }}>
-            Create new Account
+            Sign Up
           </Link>
         </Typography>
       </FormControl>
