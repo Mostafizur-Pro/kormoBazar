@@ -2,7 +2,7 @@ import React from "react";
 import { TextField, Button, FormControl, Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
   return (
     <Box
       display="flex"
@@ -12,14 +12,16 @@ const Login = () => {
     >
       <FormControl>
         <Typography variant="h4" gutterBottom>
-          Login
+          Sign Up
         </Typography>
         <TextField
-          label="Username"
+          label="Full Name"
           variant="outlined"
           margin="normal"
           required
         />
+        <TextField label="Email" variant="outlined" margin="normal" required />
+        <TextField label="Number" variant="outlined" margin="normal" required />
         <TextField
           label="Password"
           variant="outlined"
@@ -27,13 +29,20 @@ const Login = () => {
           margin="normal"
           required
         />
+        <TextField
+          label="Confirm Password"
+          variant="outlined"
+          type="password"
+          margin="normal"
+          required
+        />
         <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-          Submit
+          Sign Up
         </Button>
         <Typography variant="body2" sx={{ mt: 2 }}>
-          New to Job Portal
-          <Link to="/signup" style={{ color: "blue" }}>
-            Create new Account
+          Already have an account?{" "}
+          <Link to="/login" style={{ color: "blue" }}>
+            Please Login
           </Link>
         </Typography>
       </FormControl>
@@ -41,4 +50,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
