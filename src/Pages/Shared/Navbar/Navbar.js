@@ -35,15 +35,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
     <AppBar position="static">
       <Container maxWidth="lg">
         <Toolbar>
-          {/* <Typography
-            variant="h6"
-            component={Link}
-            to="/"
-            sx={{ flexGrow: 1, color: "white", textDecoration: "none" }}
-          >
-            Kormo Bazaar
-          </Typography> */}
-          <Box component={Link} to="/" textAlign="center" sx={{ mt: 0 }}>
+          <Box component={Link} to="/" sx={{ flexGrow: 1 }}>
             <img src={logo} alt="Company Logo" style={{ height: "30px" }} />
           </Box>
 
@@ -54,6 +46,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                 color="inherit"
                 aria-label="menu"
                 onClick={handleMenuClick}
+                sx={{ ml: 1 }}
               >
                 <MenuIcon />
               </IconButton>
@@ -61,6 +54,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
+                sx={{ mt: 3 }}
               >
                 <MenuItem component={Link} to="/" onClick={handleMenuClose}>
                   Home
@@ -72,13 +66,6 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                 >
                   About
                 </MenuItem>
-                {/* <MenuItem
-                  component={Link}
-                  to="/services"
-                  onClick={handleMenuClose}
-                >
-                  Services
-                </MenuItem> */}
                 <MenuItem
                   component={Link}
                   to="/contact"
@@ -107,16 +94,13 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
               </Menu>
             </>
           ) : (
-            <div>
+            <Box sx={{ display: 'flex', gap: 2 }}>
               <Button color="inherit" component={Link} to="/">
                 Home
               </Button>
               <Button color="inherit" component={Link} to="/about">
                 About
               </Button>
-              {/* <Button color="inherit" component={Link} to="/services">
-                Services
-              </Button> */}
               <Button color="inherit" component={Link} to="/contact">
                 Contact
               </Button>
@@ -129,7 +113,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                   Login
                 </Button>
               )}
-            </div>
+            </Box>
           )}
         </Toolbar>
       </Container>

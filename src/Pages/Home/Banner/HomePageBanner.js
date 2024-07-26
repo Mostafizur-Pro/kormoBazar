@@ -7,6 +7,7 @@ const BannerContainer = styled(Box)(({ theme }) => ({
   position: "relative",
   width: "100%",
   height: "60vh",
+  marginBottom: "30px",
   // backgroundImage: 'url(../../../assets/home/banner/banner.jpg)', // Replace with the path to your image
   backgroundImage: `url(${banner})`,
   backgroundSize: "cover",

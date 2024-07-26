@@ -17,12 +17,7 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={4}>
-            {/* <Typography variant="h4" gutterBottom>
-              Kormo Bazaar
-            </Typography>
-            <Typography variant="p" gutterBottom>
-              Don’t wait for the right opportunity: create it.
-            </Typography> */}
+     
             <Box component={Link} to="/" textAlign="center" sx={{ mt: 0 }}>
               <img src={logo} alt="Company Logo" style={{ height: "30px" }} />
             </Box>
