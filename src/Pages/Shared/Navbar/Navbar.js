@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,14 +14,15 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-
 import logo from "../../../assets/logo/Logo-2.png";
+import AuthContext from "../../context/Authentication";
 
-const Navbar = ({ isAuthenticated, onLogout }) => {
+const Navbar = () => {
   const theme = useTheme();
+  const { user, logout } = useContext(AuthContext);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -73,28 +74,35 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                 >
                   Contact
                 </MenuItem>
-                {isAuthenticated ? (
-                  <MenuItem
-                    onClick={() => {
-                      onLogout();
-                      handleMenuClose();
-                    }}
-                  >
-                    Logout
-                  </MenuItem>
+                {user ? (
+                  <>
+                    <MenuItem onClick={handleMenuClose}>
+                      {user && <Typography>{user.name}</Typography>}
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        logout();
+                        handleMenuClose();
+                      }}
+                    >
+                      Logout
+                    </MenuItem>
+                  </>
                 ) : (
-                  <MenuItem
-                    component={Link}
-                    to="/login"
-                    onClick={handleMenuClose}
-                  >
-                    Login
-                  </MenuItem>
+                  <>
+                    <MenuItem
+                      component={Link}
+                      to="/login"
+                      onClick={handleMenuClose}
+                    >
+                      Login
+                    </MenuItem>
+                  </>
                 )}
               </Menu>
             </>
           ) : (
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Box sx={{ display: "flex", gap: 2 }}>
               <Button color="inherit" component={Link} to="/">
                 Home
               </Button>
@@ -104,10 +112,13 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
               <Button color="inherit" component={Link} to="/contact">
                 Contact
               </Button>
-              {isAuthenticated ? (
-                <Button color="inherit" onClick={onLogout}>
-                  Logout
-                </Button>
+              {user ? (
+                <>
+                  {user && <Typography sx={{ mr: 2 }}>{user.name}</Typography>}
+                  <Button color="inherit" onClick={logout}>
+                    Logout
+                  </Button>
+                </>
               ) : (
                 <Button color="inherit" component={Link} to="/login">
                   Login

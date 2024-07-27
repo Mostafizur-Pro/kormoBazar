@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { TextField, Button, FormControl, Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
@@ -36,7 +37,10 @@ const Signup = () => {
           password: formData.password,
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
+      if(response.data){
+        navigate("/login");
+      }
     } catch (error) {
       console.error("There was an error signing up!", error);
     }
