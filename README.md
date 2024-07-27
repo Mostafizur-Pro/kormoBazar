@@ -107,4 +107,4 @@ You can view the server-side code here: [Kormo Bazaar Server Repository](https:/
 
 ## Contact
 
-If you have any questions, feel free to reach out at [your-email@example.com](mailto:mostafizur0195@gmail.com).
+If you have any questions, feel free to reach out at [mostafizur0195@gmail.com](mailto:mostafizur0195@gmail.com).
