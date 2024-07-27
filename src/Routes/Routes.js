@@ -10,11 +10,19 @@ import AuthLayout from "../Layout/AuthLayout";
 import Signup from "../Pages/Auth/Signup/Signup";
 import AboutPage from "../Pages/About/AboutPage";
 import ContactPage from "../Pages/Contact/ContactPage";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Main />}>
-      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <HomePage />
+          </PrivateRoute>
+        }
+      />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
 
