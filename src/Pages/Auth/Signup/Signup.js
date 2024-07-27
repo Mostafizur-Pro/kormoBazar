@@ -1,8 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Button, FormControl, Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/users/signup",
+        {
+          name: formData.name,
+          phoneNumber: formData.phoneNumber,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("There was an error signing up!", error);
+    }
+  };
+
   return (
     <Box
       display="flex"
@@ -10,33 +49,63 @@ const Signup = () => {
       alignItems="center"
       height="100vh"
     >
-      <FormControl>
+      <FormControl component="form" onSubmit={handleSubmit}>
         <Typography variant="h4" gutterBottom>
           Sign Up
         </Typography>
         <TextField
+          name="name"
           label="Full Name"
           variant="outlined"
           margin="normal"
           required
+          value={formData.name}
+          onChange={handleChange}
         />
-        <TextField label="Number" variant="outlined" margin="normal" required />
-        <TextField label="Email" variant="outlined" margin="normal" required />
         <TextField
+          name="phoneNumber"
+          label="Number"
+          variant="outlined"
+          margin="normal"
+          required
+          value={formData.phoneNumber}
+          onChange={handleChange}
+        />
+        <TextField
+          name="email"
+          label="Email"
+          variant="outlined"
+          margin="normal"
+          required
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <TextField
+          name="password"
           label="Password"
           variant="outlined"
           type="password"
           margin="normal"
           required
+          value={formData.password}
+          onChange={handleChange}
         />
         <TextField
+          name="confirmPassword"
           label="Confirm Password"
           variant="outlined"
           type="password"
           margin="normal"
           required
+          value={formData.confirmPassword}
+          onChange={handleChange}
         />
-        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+          type="submit"
+        >
           Sign Up
         </Button>
         <Typography variant="body2" sx={{ mt: 2 }}>
