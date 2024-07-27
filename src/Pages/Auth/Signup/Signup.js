@@ -20,8 +20,8 @@ const Signup = () => {
           margin="normal"
           required
         />
-        <TextField label="Email" variant="outlined" margin="normal" required />
         <TextField label="Number" variant="outlined" margin="normal" required />
+        <TextField label="Email" variant="outlined" margin="normal" required />
         <TextField
           label="Password"
           variant="outlined"

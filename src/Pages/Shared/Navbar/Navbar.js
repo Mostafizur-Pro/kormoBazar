@@ -15,7 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 
-import logo from "../../../assets/logo/logo.png";
+import logo from "../../../assets/logo/Logo-2.png";
 
 const Navbar = ({ isAuthenticated, onLogout }) => {
   const theme = useTheme();
@@ -36,7 +36,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
       <Container maxWidth="lg">
         <Toolbar>
           <Box component={Link} to="/" sx={{ flexGrow: 1 }}>
-            <img src={logo} alt="Company Logo" style={{ height: "30px" }} />
+            <img src={logo} alt="Company Logo" style={{ height: "50px" }} />
           </Box>
 
           {isMobile ? (

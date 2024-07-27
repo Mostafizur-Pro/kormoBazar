@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography, Link, Container, Grid } from "@mui/material";
-import logo from "../../../assets/logo/logo.png";
+import logo from "../../../assets/logo/Logo-1.png";
 
 const Footer = () => {
   return (
@@ -19,7 +19,7 @@ const Footer = () => {
           <Grid item xs={12} sm={6} md={4}>
      
             <Box component={Link} to="/" textAlign="center" sx={{ mt: 0 }}>
-              <img src={logo} alt="Company Logo" style={{ height: "30px" }} />
+              <img src={logo} alt="Company Logo" style={{ height: "150px",  }} />
             </Box>
           </Grid>
 
