@@ -76,6 +76,13 @@ const Navbar = () => {
                 </MenuItem>
                 {user ? (
                   <>
+                    <MenuItem
+                      component={Link}
+                      to="/create-job"
+                      onClick={handleMenuClose}
+                    >
+                      Create Job
+                    </MenuItem>
                     <MenuItem onClick={handleMenuClose}>
                       {user && <Typography>{user.name}</Typography>}
                     </MenuItem>
@@ -114,6 +121,9 @@ const Navbar = () => {
               </Button>
               {user ? (
                 <>
+                  <Button color="inherit" component={Link} to="/create-job">
+                    Create Job
+                  </Button>
                   {user && <Typography sx={{ mr: 2 }}>{user.name}</Typography>}
                   <Button color="inherit" onClick={logout}>
                     Logout

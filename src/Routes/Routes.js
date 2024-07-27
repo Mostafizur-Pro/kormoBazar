@@ -11,6 +11,7 @@ import Signup from "../Pages/Auth/Signup/Signup";
 import AboutPage from "../Pages/About/AboutPage";
 import ContactPage from "../Pages/Contact/ContactPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import JobForm from "../Pages/JobForm/JobForm";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/create-job" element={<JobForm />} />
 
       <Route element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
