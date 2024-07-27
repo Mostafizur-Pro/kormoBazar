@@ -20,6 +20,7 @@ import AuthContext from "../../context/Authentication";
 const Navbar = () => {
   const theme = useTheme();
   const { user, logout } = useContext(AuthContext);
+
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const [anchorEl, setAnchorEl] = useState(null);

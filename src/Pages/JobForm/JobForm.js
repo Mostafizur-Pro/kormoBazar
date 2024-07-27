@@ -1,8 +1,19 @@
-import React, { useState } from "react";
-import { TextField, Button, Box, Typography, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
+import React, { useContext, useState } from "react";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import JobFormAPI from "../hooks/JobFormAPI/JobFormAPI";
+import AuthContext from "../context/Authentication";
 
 const JobForm = () => {
+  const { user } = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [company, setCompany] = useState("");
@@ -11,6 +22,8 @@ const JobForm = () => {
   const [salary, setSalary] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const userId = user?._id;
 
   const categories = [
     "Digital Marketing",
@@ -23,37 +36,44 @@ const JobForm = () => {
     "Development",
   ];
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const jobData = { title, description, company, location, category, salary };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const jobData = {
+      title,
+      description,
+      company,
+      location,
+      category,
+      user_id : userId,
+      salary,
+    };
+    console.log('data', jobData)
 
-  //   try {
-  //     const response = await JobFormAPI.post("/jobs/create-job", jobData);
-  //     if (response.status === 201) {
-  //       setSuccessMessage("Job post created successfully!");
-  //       setTitle("");
-  //       setDescription("");
-  //       setCompany("");
-  //       setLocation("");
-  //       setCategory("");
-  //       setSalary("");
-  //       setErrorMessage("");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error creating job:", error);
-  //     setErrorMessage("Failed to create job post.");
-  //     setSuccessMessage("");
-  //   }
-  // };
+    try {
+      const response = await JobFormAPI.post("/jobs/create-job", jobData);
+      if (response.status === 201) {
+        setSuccessMessage("Job post created successfully!");
+        setTitle("");
+        setDescription("");
+        setCompany("");
+        setLocation("");
+        setCategory("");
+        setSalary("");
+        setErrorMessage("");
+      }
+    } catch (error) {
+      console.error("Error creating job:", error);
+      setErrorMessage("Failed to create job post.");
+      setSuccessMessage("");
+    }
+  };
 
   return (
     <Box sx={{ maxWidth: 600, mx: "auto", mt: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
         Create Job Post
       </Typography>
-      <Box component="form" 
-      // onSubmit={handleSubmit}
-      >
+      <Box component="form" onSubmit={handleSubmit}>
         <TextField
           label="Title"
           fullWidth
