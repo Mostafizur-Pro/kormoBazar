@@ -24,13 +24,19 @@ const Navbar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [jobMenuAnchorEl, setJobMenuAnchorEl] = useState(null);
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleJobMenuClick = (event) => {
+    setJobMenuAnchorEl(event.currentTarget);
+  };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
+    setJobMenuAnchorEl(null);
   };
 
   return (
@@ -77,13 +83,28 @@ const Navbar = () => {
                 </MenuItem>
                 {user ? (
                   <>
-                    <MenuItem
-                      component={Link}
-                      to="/create-job"
-                      onClick={handleMenuClose}
+                    <MenuItem onClick={handleJobMenuClick}>Jobs</MenuItem>
+                    <Menu
+                      anchorEl={jobMenuAnchorEl}
+                      open={Boolean(jobMenuAnchorEl)}
+                      onClose={handleMenuClose}
+                      sx={{ mt: 3 }}
                     >
-                      Create Job
-                    </MenuItem>
+                      <MenuItem
+                        component={Link}
+                        to="/create-job"
+                        onClick={handleMenuClose}
+                      >
+                        Create Job
+                      </MenuItem>
+                      <MenuItem
+                        component={Link}
+                        to="/jobs"
+                        onClick={handleMenuClose}
+                      >
+                        All Job Posts
+                      </MenuItem>
+                    </Menu>
                     <MenuItem onClick={handleMenuClose}>
                       {user && <Typography>{user.name}</Typography>}
                     </MenuItem>
@@ -122,10 +143,36 @@ const Navbar = () => {
               </Button>
               {user ? (
                 <>
-                  <Button color="inherit" component={Link} to="/create-job">
-                    Create Job
+                  <Button
+                    color="inherit"
+                    aria-controls="job-menu"
+                    aria-haspopup="true"
+                    onClick={handleJobMenuClick}
+                  >
+                    Jobs
                   </Button>
-                  {user && <Typography sx={{ mr: 2 }}>{user.name}</Typography>}
+                  <Menu
+                    id="job-menu"
+                    anchorEl={jobMenuAnchorEl}
+                    open={Boolean(jobMenuAnchorEl)}
+                    onClose={handleMenuClose}
+                  >
+                    <MenuItem
+                      component={Link}
+                      to="/jobs/create-job"
+                      onClick={handleMenuClose}
+                    >
+                      Create Job
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/jobs"
+                      onClick={handleMenuClose}
+                    >
+                      All Job Posts
+                    </MenuItem>
+                  </Menu>
+                  <Typography sx={{ mr: 2 }}>{user.name}</Typography>
                   <Button color="inherit" onClick={logout}>
                     Logout
                   </Button>

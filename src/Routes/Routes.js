@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Route,
   createBrowserRouter,
@@ -11,29 +12,41 @@ import Signup from "../Pages/Auth/Signup/Signup";
 import AboutPage from "../Pages/About/AboutPage";
 import ContactPage from "../Pages/Contact/ContactPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import JobForm from "../Pages/JobForm/JobForm";
+import JobForm from "../Pages/Job/JobForm/JobForm";
+import JobLayout from "../Layout/JobLayout/JobLayout";
+import AllJob from "../Pages/Job/AllJob/AllJob";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Main />}>
-      <Route
-        path="/"
-        element={
-          <PrivateRoute>
-            <HomePage />
-          </PrivateRoute>
-        }
-      />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/create-job" element={<JobForm />} />
-
-      <Route element={<AuthLayout />}>
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        {/* <Route path="logout" action={logoutUser} /> */}
+    <>
+      <Route path="/" element={<Main />}>
+        <Route
+          index
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="jobs/create-job" element={<JobForm />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="contact" element={<ContactPage />} />
+        <Route element={<AuthLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+        </Route>
       </Route>
-    </Route>
+      <Route path="/jobs" element={<JobLayout />}>
+        <Route
+          index
+          element={
+            <PrivateRoute>
+              <AllJob />
+            </PrivateRoute>
+          }
+        />
+      </Route>
+    </>
   )
 );
 

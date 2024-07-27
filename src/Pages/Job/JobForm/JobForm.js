@@ -9,11 +9,13 @@ import {
   InputLabel,
   FormControl,
 } from "@mui/material";
-import JobFormAPI from "../hooks/JobFormAPI/JobFormAPI";
-import AuthContext from "../context/Authentication";
+import JobFormAPI from "../../hooks/JobFormAPI/JobFormAPI";
+import AuthContext from "../../context/Authentication";
+import { useNavigate } from "react-router-dom";
 
 const JobForm = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [company, setCompany] = useState("");
@@ -44,10 +46,10 @@ const JobForm = () => {
       company,
       location,
       category,
-      user_id : userId,
+      user_id: userId,
       salary,
     };
-    console.log('data', jobData)
+    // console.log("data", jobData);
 
     try {
       const response = await JobFormAPI.post("/jobs/create-job", jobData);
@@ -61,6 +63,7 @@ const JobForm = () => {
         setSalary("");
         setErrorMessage("");
       }
+      navigate("/");
     } catch (error) {
       console.error("Error creating job:", error);
       setErrorMessage("Failed to create job post.");
