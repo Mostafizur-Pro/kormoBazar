@@ -2,13 +2,21 @@
 
 Welcome to Kormo Bazaar! This is a job portal application where users can view, edit, and delete job posts.
 
-## Live Demo
+## Live Demo Client
 
-You can view the live application here: [Kormo Bazaar Live](https://kormo-bazaar.vercel.app/)
+You can view the live client application here: [Kormo Bazaar Live](https://kormo-bazaar.vercel.app/)
 
-## Server
+## Live Demo Server
 
-The server for this application can be found at: [Kormo Bazaar Server](https://kormo-bazar-server1.vercel.app/)
+The server for this application can be found here: [Kormo Bazaar Server](https://kormo-bazar-server1.vercel.app/)
+
+## Git Repository Client
+
+You can view the client-side code here: [Kormo Bazaar Client Repository](https://github.com/Mostafizur-Pro/kormoBazar/)
+
+## Git Repository Server
+
+You can view the server-side code here: [Kormo Bazaar Server Repository](https://github.com/Mostafizur-Pro/kormoBazarServer1/)
 
 ## Features
 
@@ -23,60 +31,71 @@ The server for this application can be found at: [Kormo Bazaar Server](https://k
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone https://github.com/Mostafizur-Pro/kormoBazar.git
-    ```
+   ```bash
+   git clone https://github.com/Mostafizur-Pro/kormoBazar.git
+   ```
 
 2. **Navigate to the frontend directory:**
 
-    ```bash
-    cd kormoBazar
-    ```
+   ```bash
+   cd kormoBazar
+   ```
 
 3. **Install dependencies:**
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 4. **Start the development server:**
 
-    ```bash
-    npm run start
-    ```
+   ```bash
+   npm run start
+   ```
 
 ### Backend
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone https://github.com/Mostafizur-Pro/kormoBazarServer1.git
-    ```
+   ```bash
+   git clone https://github.com/Mostafizur-Pro/kormoBazarServer1.git
+   ```
 
 2. **Navigate to the backend directory:**
 
-    ```bash
-    cd kormoBazarServer1
-    ```
+   ```bash
+   cd kormoBazarServer1
+   ```
 
 3. **Install dependencies:**
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 4. **Start the server:**
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 ## API Endpoints
 
-- **GET /api/v1/jobs**: Retrieve all job posts.
-- **GET /api/v1/jobs?category={category}**: Retrieve job posts filtered by category.
-- **PUT /api/v1/jobs/update/:id**: Update a specific job post.
-- **DELETE /api/v1/jobs/delete/:id**: Delete a specific job post.
+1. **Job Post API:**
+
+   - **GET /api/v1/jobs**: Retrieve all job posts.
+   - **GET /api/v1/jobs?category={category}**: Retrieve job posts filtered by category.
+   - **PUT /api/v1/jobs/update/:id**: Update a specific job post.
+   - **DELETE /api/v1/jobs/delete/:id**: Delete a specific job post.
+
+2. **User API:**
+
+   - **POST /api/v1/users/signup**: Register a new user.
+   - **GET /api/v1/users/email/:email**: Retrieve user information by email.
+
+3. **Auth API:**
+   - **POST /api/v1/auth/login**: Login user.
+   - **GET /api/v1/auth/userinfo**: Find user by token.
 
 ## Contributing
 
@@ -86,11 +105,6 @@ The server for this application can be found at: [Kormo Bazaar Server](https://k
 4. **Push your branch** to GitHub.
 5. **Open a pull request**.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
-If you have any questions, feel free to reach out at [your-email@example.com](mailto:your-email@example.com).
-
+If you have any questions, feel free to reach out at [your-email@example.com](mailto:mostafizur0195@gmail.com).
