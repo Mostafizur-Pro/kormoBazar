@@ -39,6 +39,15 @@ const AccordionPage = () => {
 
   return (
     <Box sx={{ width: "100%", maxWidth: 600, margin: "auto", padding: 2 }}>
+      <Typography variant="h4" gutterBottom>
+        Explore Job Opportunities by Category
+      </Typography>
+      <Typography variant="body1" paragraph>
+        Discover a wide range of job opportunities tailored to your skills and
+        interests. Browse through various categories to find the perfect role
+        for you.
+      </Typography>
+      
       {categories.map((category, index) => (
         <Accordion
           key={index}
