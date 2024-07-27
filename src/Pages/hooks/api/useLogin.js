@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 const useLogin = (email) => {
-    console.log('email', email)
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAdminLoading, setIsAdminLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(
-        `https://b612-used-products-resale-server-side-mostafizur-pro.vercel.app/users/admin/${email}`
-      )
+      fetch(`http://localhost:5000/api/v1/users/email/${email}`)
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);

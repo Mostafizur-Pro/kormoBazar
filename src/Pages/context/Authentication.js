@@ -4,12 +4,17 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Set initial loading state to true
+  const [login, setLogin] = useState(null);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       const token = localStorage.getItem("accessToken");
 
-      if (!token) return;
+      if (!token) {
+        setLoading(false);
+        return;
+      }
 
       try {
         const response = await fetch(
@@ -23,18 +28,20 @@ export const AuthProvider = ({ children }) => {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log("response", data.data);
+          // console.log("response", data.data);
           setUser(data.data); // Store the user info in state
         } else {
           console.error("Failed to fetch user info");
         }
       } catch (error) {
         console.error("Error fetching user info:", error);
+      } finally {
+        setLoading(false); // Set loading to false after the request is done
       }
     };
 
     fetchUserInfo();
-  }, []); // Empty dependency array means this runs once when the component mounts
+  }, [login]); // Re-run this effect when login state changes
 
   const logout = () => {
     setUser(null);
@@ -42,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, logout }}>
+    <AuthContext.Provider value={{ user, logout, loading, login, setLogin }}>
       {children}
     </AuthContext.Provider>
   );

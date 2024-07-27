@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { TextField, Button, FormControl, Box, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import AuthContext from "../../context/Authentication";
 
 const Login = () => {
+  const { user, setLogin } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  if (user) {
+    return navigate("/");
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,7 +26,7 @@ const Login = () => {
       );
       const { accessToken } = response.data.data;
       localStorage.setItem("accessToken", accessToken);
-
+      setLogin(false);
       navigate("/");
     } catch (err) {
       setError("Login failed. Please check your email and password.");
