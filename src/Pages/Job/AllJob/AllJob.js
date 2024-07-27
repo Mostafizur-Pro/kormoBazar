@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -7,19 +7,21 @@ import {
   Grid,
   CircularProgress,
   Container,
-  Button,
   IconButton,
-  Menu,
-  MenuItem,
 } from "@mui/material";
 import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useLocation } from "react-router-dom";
+import AuthContext from "../../context/Authentication";
 
 const AllJob = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { user } = useContext(AuthContext);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -39,6 +41,17 @@ const AllJob = () => {
 
     fetchJobs();
   }, []);
+
+  // Extract query parameters
+  const queryParams = new URLSearchParams(location.search);
+  const filterCategory = queryParams.get("category");
+
+  console.log("data", filterCategory);
+
+  // Filter jobs based on category
+  const filteredJobs = filterCategory
+    ? jobs.filter((job) => job.category === filterCategory)
+    : jobs;
 
   const handleEdit = (jobId) => {
     console.log(`Edit job with id: ${jobId}`);
@@ -64,7 +77,7 @@ const AllJob = () => {
   return (
     <Container>
       <Typography variant="h4" component="h1" gutterBottom>
-        All Job Posts
+        {filterCategory ? `${filterCategory} Job Posts` : "All Job Posts"}
       </Typography>
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -74,9 +87,11 @@ const AllJob = () => {
         <Typography variant="body1" color="error">
           {error}
         </Typography>
+      ) : filteredJobs.length === 0 ? (
+        <Typography variant="body1">No jobs found.</Typography>
       ) : (
         <Grid container spacing={4}>
-          {jobs.map((job) => (
+          {filteredJobs.map((job) => (
             <Grid item xs={12} sm={6} md={4} key={job._id}>
               <Card
                 sx={{ height: 300, display: "flex", flexDirection: "column" }}
@@ -101,20 +116,24 @@ const AllJob = () => {
                     <strong>Salary:</strong> ${job.salary}
                   </Typography>
                 </CardContent>
-                <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleEdit(job._id)}
+                {user && job.user_id === user._id && (
+                  <Box
+                    sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}
                   >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    color="error"
-                    onClick={() => handleDelete(job._id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleEdit(job._id)}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      color="error"
+                      onClick={() => handleDelete(job._id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
+                )}
               </Card>
             </Grid>
           ))}

@@ -27,11 +27,14 @@ const JobSideBar = () => {
         Categories
       </Typography>
       <List>
+        <ListItem button component={Link} to={`/jobs`}>
+          <ListItemText primary={"All Job Post"} />
+        </ListItem>
         {categories.map((category) => (
           <ListItem
             button
             component={Link}
-            to={`/jobs/${category}`}
+            to={`/jobs?category=${category}`}
             key={category}
           >
             <ListItemText primary={category} />
