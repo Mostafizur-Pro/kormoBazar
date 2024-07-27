@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/api/v1/auth/userinfo",
+          "https://kormo-bazar-server1.vercel.app/api/v1/auth/userinfo",
           {
             method: "GET",
             headers: {

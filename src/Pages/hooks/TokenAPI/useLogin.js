@@ -5,7 +5,7 @@ const useLogin = (email) => {
   const [isAdminLoading, setIsAdminLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/api/v1/users/email/${email}`)
+      fetch(`https://kormo-bazar-server1.vercel.app/api/v1/users/email/${email}`)
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);

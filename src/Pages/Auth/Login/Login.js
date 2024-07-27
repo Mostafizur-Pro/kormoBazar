@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "https://kormo-bazar-server1.vercel.app/api/v1/auth/login",
         {
           email,
           password,

@@ -29,7 +29,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/users/signup",
+        "https://kormo-bazar-server1.vercel.app/api/v1/users/signup",
         {
           name: formData.name,
           phoneNumber: formData.phoneNumber,

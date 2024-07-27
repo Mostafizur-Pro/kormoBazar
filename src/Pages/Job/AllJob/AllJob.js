@@ -8,6 +8,12 @@ import {
   CircularProgress,
   Container,
   IconButton,
+  TextField,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
 import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
@@ -19,6 +25,16 @@ const AllJob = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [currentJob, setCurrentJob] = useState(null);
+  const [editJobData, setEditJobData] = useState({
+    title: "",
+    description: "",
+    company: "",
+    location: "",
+    category: "",
+    salary: "",
+  });
 
   const { user } = useContext(AuthContext);
   const location = useLocation();
@@ -26,7 +42,9 @@ const AllJob = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/v1/jobs");
+        const response = await axios.get(
+          "https://kormo-bazar-server1.vercel.app/api/v1/jobs"
+        );
         if (response.data.success) {
           setJobs(response.data.data);
         } else {
@@ -46,22 +64,68 @@ const AllJob = () => {
   const queryParams = new URLSearchParams(location.search);
   const filterCategory = queryParams.get("category");
 
-  console.log("data", filterCategory);
-
   // Filter jobs based on category
   const filteredJobs = filterCategory
     ? jobs.filter((job) => job.category === filterCategory)
     : jobs;
 
-  const handleEdit = (jobId) => {
-    console.log(`Edit job with id: ${jobId}`);
-    // Add your edit logic here, e.g., redirect to an edit page
+  const handleEdit = (job) => {
+    setCurrentJob(job);
+    setEditJobData({
+      title: job.title,
+      description: job.description,
+      company: job.company,
+      location: job.location,
+      category: job.category,
+      salary: job.salary,
+    });
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditJobData({ ...editJobData, [name]: value });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      // Debugging: log the data being sent
+      //   console.log('Updating job with data:', editJobData, currentJob._id);
+
+      const response = await axios.patch(
+        `https://kormo-bazar-server1.vercel.app/api/v1/jobs/update/${currentJob._id}`,
+        editJobData
+      );
+
+      if (response.status === 200) {
+        setJobs(
+          jobs.map((job) =>
+            job._id === currentJob._id ? { ...job, ...editJobData } : job
+          )
+        );
+        handleClose();
+        alert("Job updated successfully!");
+      } else {
+        alert("Failed to update job. Status code: " + response.status);
+      }
+    } catch (error) {
+      // Debugging: log the error details
+      console.error(
+        "Error updating job:",
+        error.response ? error.response.data : error.message
+      );
+      alert("An error occurred while updating the job.");
+    }
   };
 
   const handleDelete = async (jobId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/v1/jobs/delete/${jobId}`
+        `https://kormo-bazar-server1.vercel.app/api/v1/jobs/delete/${jobId}`
       );
       if (response.status === 200) {
         setJobs(jobs.filter((job) => job._id !== jobId));
@@ -120,10 +184,7 @@ const AllJob = () => {
                   <Box
                     sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}
                   >
-                    <IconButton
-                      color="primary"
-                      onClick={() => handleEdit(job._id)}
-                    >
+                    <IconButton color="primary" onClick={() => handleEdit(job)}>
                       <EditIcon />
                     </IconButton>
                     <IconButton
@@ -139,6 +200,69 @@ const AllJob = () => {
           ))}
         </Grid>
       )}
+
+      {/* Edit Job Modal */}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Edit Job</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Title"
+            name="title"
+            value={editJobData.title}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Description"
+            name="description"
+            value={editJobData.description}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            multiline
+            rows={4}
+          />
+          <TextField
+            label="Company"
+            name="company"
+            value={editJobData.company}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Location"
+            name="location"
+            value={editJobData.location}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Category"
+            name="category"
+            value={editJobData.category}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Salary"
+            name="salary"
+            value={editJobData.salary}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit} color="primary">
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
