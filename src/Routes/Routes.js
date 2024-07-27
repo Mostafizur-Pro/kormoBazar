@@ -28,9 +28,30 @@ const router = createBrowserRouter(
             </PrivateRoute>
           }
         />
-        <Route path="jobs/create-job" element={<JobForm />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="contact" element={<ContactPage />} />
+        <Route
+          path="jobs/create-job"
+          element={
+            <PrivateRoute>
+              <JobForm />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="about"
+          element={
+            <PrivateRoute>
+              <AboutPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="contact"
+          element={
+            <PrivateRoute>
+              <ContactPage />
+            </PrivateRoute>
+          }
+        />
         <Route element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
