@@ -107,4 +107,10 @@ You can view the server-side code here: [Kormo Bazaar Server Repository](https:/
 
 ## Contact
 
-If you have any questions, feel free to reach out at [mostafizur0195@gmail.com](mailto:mostafizur0195@gmail.com).
+If you have any questions, feel free to reach out at [mostafizur0195@gmail.com](mailto:mostafizur0195@gmail.com) or call me at [01950165017](tel:01950165017).
+
+You can also connect with me on:
+
+- **WhatsApp:** [Click to chat](https://wa.me/01950165017)
+- **Facebook:** [Mostafizur Rahman](https://www.facebook.com/mostafizur.proo/)
+- **LinkedIn:** [Mostafizur Rahman](https://www.linkedin.com/in/mostafizur-pro/)
