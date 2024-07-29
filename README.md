@@ -18,6 +18,10 @@ You can view the client-side code here: [Kormo Bazaar Client Repository](https:/
 
 You can view the server-side code here: [Kormo Bazaar Server Repository](https://github.com/Mostafizur-Pro/kormoBazarServer1/)
 
+## Task-2 figma
+
+You can view the figma clon here: [Figma design](https://www.figma.com/design/2BydMtroqRynJFlgOp1pNZ/Most---Design?node-id=0-1&t=pYjWYcY4tyiwgGIo-1))
+
 ## Features
 
 - **View Job Posts**: Browse through a list of available job posts.
